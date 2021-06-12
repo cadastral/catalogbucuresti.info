@@ -77,3 +77,4 @@ ic(len(zone))
 # ic(places.keys())
 
 # %%
+print("== DONE ==")
