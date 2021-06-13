@@ -1,29 +1,25 @@
-# %%
-
+import os
 import json
 import requests
 
-from itertools import chain, groupby
+import asyncio
+import aiohttp
 
 from icecream import ic
 
 from bs4 import BeautifulSoup
 
-# %%
+from toolz import partition_all
+
 
 ROOT_PATH = "https://catalogbucuresti.info"
 DETAIL_PATH = "https://catalogbucuresti.info/map/document-details"
-
-# %%
 
 
 def get_root():
     response = requests.request("GET", ROOT_PATH)
     response.raise_for_status()
     return response
-
-
-# %%
 
 
 def get_detail_auth():
@@ -43,12 +39,10 @@ def get_detail_auth():
     return (COOKIES_STRING, TOKEN)
 
 
-# %%
-
 COOKIES_STRING, TOKEN = get_detail_auth()
 
 
-def get_detail(id: int) -> str:
+async def get_detail(session: aiohttp.ClientSession, id: int) -> str:
     url = "https://catalogbucuresti.info/map/document-details"
 
     headers = {
@@ -59,28 +53,49 @@ def get_detail(id: int) -> str:
         "Cookie": COOKIES_STRING,
     }
 
-    response = requests.request("POST", DETAIL_PATH, headers=headers, data=f"id={id}")
+    async with session.request(
+        "POST", DETAIL_PATH, headers=headers, data=f"id={id}"
+    ) as response:
 
-    try:
-        response.raise_for_status()
-    except:
-        print(response.content)
-        raise
+        ic(response.status)
 
-    content = response.content.decode()
+        content = await response.text()
+        soup = BeautifulSoup(content, features="html.parser")
 
-    return BeautifulSoup(content, features="html.parser").prettify()
-
-
-# %%
+        return soup.prettify()
 
 
-def write_html(id: int) -> None:
+async def write_detail(session: aiohttp.ClientSession, id: int) -> None:
     with open(f"./details-html/{id}.html", "w", encoding="utf-8") as fh:
-        detail = get_detail(id)
+        detail = await get_detail(session, id)
         fh.write(detail)
 
 
-write_html(3882)
+async def batch(ids):
+    async with aiohttp.ClientSession() as session:
+        tasks = []
+        for i in ids:
+            tasks.append(write_detail(session, i))
+        await asyncio.gather(*tasks, return_exceptions=True)
 
-# %%
+
+def read_places():
+    with open("places.json", "r", encoding="utf-8") as fh:
+        return json.loads(fh.read())
+
+
+places = read_places()
+ic(len(places))
+
+ids = [int(p["id"]) for p in places]
+ic(len(ids))  # 12.937
+
+
+in_dir = [int(name.split(".")[0]) for name in os.listdir("./details-html")]
+ic(len(in_dir))
+
+ids = [i for i in ids if i not in in_dir]
+ic(len(ids))
+
+for b in partition_all(100, ids):
+    asyncio.run(batch(b))
