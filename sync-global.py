@@ -54,7 +54,7 @@ zones_from_places = {int(z) for z in places.keys()}
 # zones_from_areas = {int(a["id"]) for a in areas}
 zones_from_areas = {a["name"] for a in areas}
 
-ic(sorted(zones_from_areas))
+print(sorted(zones_from_areas))
 
 
 # ic(zones_from_areas - zones_from_places)
@@ -78,3 +78,5 @@ ic(len(zone))
 
 # %%
 print("== DONE ==")
+
+# %%
