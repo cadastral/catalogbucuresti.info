@@ -54,14 +54,14 @@ async def get_detail(session: aiohttp.ClientSession, id: int) -> str:
         "POST", DETAIL_PATH, headers=headers, data=f"id={id}"
     ) as response:
 
-        ic(response.status)
+        # ic(response.status)
 
         content = await response.text()
         soup = BeautifulSoup(content, features="html.parser")
 
         pretty = soup.prettify()
 
-    if pretty:
+    if len(pretty) > 0:
         return pretty
     else:
         print("EMPTY RESPONSE, retrying")
