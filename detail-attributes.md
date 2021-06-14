@@ -276,59 +276,59 @@ cladiri pot fi in doua zone simultan !?
 - profil
 - zona
 - identitate
-	- comentarii-funcțiune
-	- comentarii-la-adresă
-	- denumire-imobil
-	- funcțiune-clădire
-	- funcțiune-teren
-	- nr.-construcții-pe-parcelă
 	- numele-străzii
 	- numărul-imobilului
-	- perioada-de-construcție
-	- sursa-denumirii
 	- sursa-pe-baza-căruia-a-fost-identificat-numărul-imobilului
+	- nr.-construcții-pe-parcelă
+	- comentarii-la-adresă
+	- denumire-imobil
+	- sursa-denumirii
 	- tip-imobil
+	- perioada-de-construcție
+	- funcțiune-clădire
+	- comentarii-funcțiune
+	- funcțiune-teren
 - statut-de-patrimoniu
-	- argumente-pentru-clasare
 	- clasare
-	- cod-ansamblu-de-arhitectură
-	- cod-monument-istoric
 	- propus-spre-clasare
+	- argumente-pentru-clasare
+	- cod-monument-istoric
+	- cod-ansamblu-de-arhitectură
 - risc-seismic
 	- imobil-expertizat-tehnic
 	- prezintă-fisuri-seismice
 - arhitectura
-	- an-construcție
-	- arhitect
 	- elemente-decorative
-	- sursa-perioadei-construirii
-	- sursă-nume-arhitect
 	- tip-acoperiș
+	- an-construcție
+	- sursa-perioadei-construirii
+	- arhitect
+	- sursă-nume-arhitect
 - dimensiuni-si-amplasare
-	- alinierea-față-de-stradă
 	- niveluri-supraterane
-	- regim-de-înălțime-----încadrare-în-regulamentul-z.c.p.-(1997-2000)*
 	- înălțime-în-metri
+	- regim-de-înălțime-----încadrare-în-regulamentul-z.c.p.-(1997-2000)*
+	- alinierea-față-de-stradă
 - intervenții-neconforme-cu-regulamentul-de--zcp
-	- alte-intervenții
 	- intervenții-neconforme-cu-regulamentul-zcp
+	- alte-intervenții
 - spatiul-neconstruit-si-imprejmuiri *
-	- impact-vizual-spațiu-neconstruit
-	- raport-spațiu-construit/-spațiu-neconstruit
 	- împrejmuiri
+	- raport-spațiu-construit/-spațiu-neconstruit
+	- impact-vizual-spațiu-neconstruit
 - alerte *
 - aspect
+	- regim-de-înălțime---încadrare-în-context
 	- comentarii-despre-impactul-înălțimii
 	- grad-de-întreținere
-	- regim-de-înălțime---încadrare-în-context
 - colectiv--corectare
 	- autor-fișă
-	- autor-fotografii
 	- calificare-autor-fișă
-	- calificare-coordonator
-	- coordonator
 	- data-completării
+	- autor-fotografii
 	- data-fotografierii
+	- coordonator
+	- calificare-coordonator
 - alte-observații
-	- diverse
 	- în-atenția-coordonatorului
+	- diverse
