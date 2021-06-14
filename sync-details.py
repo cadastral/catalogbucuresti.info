@@ -43,13 +43,10 @@ COOKIES_STRING, TOKEN = get_detail_auth()
 
 
 async def get_detail(session: aiohttp.ClientSession, id: int) -> str:
-    url = "https://catalogbucuresti.info/map/document-details"
-
     headers = {
         "X-CSRF-Token": TOKEN,
         "X-Requested-With": "XMLHttpRequest",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        # "Cookie": "_csrf-frontend=a9e905e3086ba4d68f7fedd52fbc91fc0134fcf430b45a141ded68a35dd9cd6aa%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22camhsmHOftIFoZpigYAutHbKTjNIASkm%22%3B%7D; advanced-frontend=nvb9ejqr5nip82ar9utm14i7rt",
         "Cookie": COOKIES_STRING,
     }
 
@@ -62,7 +59,13 @@ async def get_detail(session: aiohttp.ClientSession, id: int) -> str:
         content = await response.text()
         soup = BeautifulSoup(content, features="html.parser")
 
-        return soup.prettify()
+        pretty = soup.prettify()
+
+    if pretty:
+        return pretty
+    else:
+        print("EMPTY RESPONSE, retrying")
+        return get_detail(session, id)
 
 
 async def write_detail(session: aiohttp.ClientSession, id: int) -> None:
@@ -88,7 +91,9 @@ places = read_places()
 ic(len(places))
 
 ids = [int(p["id"]) for p in places]
-ic(len(ids))  # 12.937
+ic(len(ids))
+# 12.937
+# 12.958
 
 
 in_dir = [int(name.split(".")[0]) for name in os.listdir("./details-html")]
