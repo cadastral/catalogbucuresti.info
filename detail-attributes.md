@@ -113,8 +113,6 @@
 # Colectare
 
 - linkuri poze
-- titlu
-- adresa (nume+numar)
 - zona
 	* zona constuita protejata (area)
 		- 98 de zone
@@ -127,6 +125,8 @@
 		- integer + letter ?
 	- sursa identificarii numarului
 	- nr constructii pe parcela
+	- comentarii adresa
+	- denumire imobil
 	* tip imobil
 		- imobil construit
 		- imobil neconstruit
@@ -267,3 +267,68 @@
 ---
 
 cladiri pot fi in doua zone simultan !?
+
+
+# ----------------------------------------------------------
+
+- id
+- images
+- profil
+- zona
+- identitate
+	- comentarii-funcțiune
+	- comentarii-la-adresă
+	- denumire-imobil
+	- funcțiune-clădire
+	- funcțiune-teren
+	- nr.-construcții-pe-parcelă
+	- numele-străzii
+	- numărul-imobilului
+	- perioada-de-construcție
+	- sursa-denumirii
+	- sursa-pe-baza-căruia-a-fost-identificat-numărul-imobilului
+	- tip-imobil
+- statut-de-patrimoniu
+	- argumente-pentru-clasare
+	- clasare
+	- cod-ansamblu-de-arhitectură
+	- cod-monument-istoric
+	- propus-spre-clasare
+- risc-seismic
+	- imobil-expertizat-tehnic
+	- prezintă-fisuri-seismice
+- arhitectura
+	- an-construcție
+	- arhitect
+	- elemente-decorative
+	- sursa-perioadei-construirii
+	- sursă-nume-arhitect
+	- tip-acoperiș
+- dimensiuni-si-amplasare
+	- alinierea-față-de-stradă
+	- niveluri-supraterane
+	- regim-de-înălțime-----încadrare-în-regulamentul-z.c.p.-(1997-2000)*
+	- înălțime-în-metri
+- intervenții-neconforme-cu-regulamentul-de--zcp
+	- alte-intervenții
+	- intervenții-neconforme-cu-regulamentul-zcp
+- spatiul-neconstruit-si-imprejmuiri *
+	- impact-vizual-spațiu-neconstruit
+	- raport-spațiu-construit/-spațiu-neconstruit
+	- împrejmuiri
+- alerte *
+- aspect
+	- comentarii-despre-impactul-înălțimii
+	- grad-de-întreținere
+	- regim-de-înălțime---încadrare-în-context
+- colectiv--corectare
+	- autor-fișă
+	- autor-fotografii
+	- calificare-autor-fișă
+	- calificare-coordonator
+	- coordonator
+	- data-completării
+	- data-fotografierii
+- alte-observații
+	- diverse
+	- în-atenția-coordonatorului
