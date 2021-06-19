@@ -108,11 +108,11 @@ base_keys = set()
 
 for d in details:
     for k, subs in d.items():
-
-        for s in subs.keys():
-            k = k.lower().replace(" ", "-")
-            s = s.lower().replace(" ", "-")
-            base_keys.add(f"{k}|{s}")
+        if type(subs) == dict:
+            for s in subs.keys():
+                k = k.lower().replace(" ", "-")
+                s = s.lower().replace(" ", "-")
+                base_keys.add(f"{k}|{s}")
 
 ic(base_keys)
 
