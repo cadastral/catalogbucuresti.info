@@ -62,10 +62,10 @@ print(sorted(zones_from_areas))
 places = [*chain(*places.values())]
 
 with open("areas.json", "w", encoding="utf-8") as fh:
-    json.dump(areas, fh, sort_keys=True, indent=2)
+    json.dump(areas, fh, sort_keys=True, indent=2, ensure_ascii=False)
 
 with open("places.json", "w", encoding="utf-8") as fh:
-    json.dump(places, fh, sort_keys=True, indent=2)
+    json.dump(places, fh, sort_keys=True, indent=2, ensure_ascii=False)
 
 zone = dict(groupby(areas, key=lambda p: p["id"]))
 

@@ -16,6 +16,11 @@ ROOT_PATH = "https://catalogbucuresti.info"
 DETAIL_PATH = "https://catalogbucuresti.info/map/document-details"
 
 
+# ------------------------------------------------------------------------------
+# GET AUTH
+# ------------------------------------------------------------------------------
+
+
 def get_root():
     response = requests.request("GET", ROOT_PATH)
     response.raise_for_status()
@@ -42,6 +47,9 @@ def get_detail_auth():
 COOKIES_STRING, TOKEN = get_detail_auth()
 
 
+# ------------------------------------------------------------------------------
+
+
 async def get_detail(session: aiohttp.ClientSession, id: int) -> str:
     headers = {
         "X-CSRF-Token": TOKEN,
@@ -62,6 +70,7 @@ async def get_detail(session: aiohttp.ClientSession, id: int) -> str:
         pretty = soup.prettify()
 
     if len(pretty) > 0:
+        ic(id)
         return pretty
     else:
         print("EMPTY RESPONSE, retrying")
@@ -76,15 +85,16 @@ async def write_detail(session: aiohttp.ClientSession, id: int) -> None:
 
 async def batch(ids):
     async with aiohttp.ClientSession() as session:
-        tasks = []
-        for i in ids:
-            tasks.append(write_detail(session, i))
+        tasks = [write_detail(session, i) for i in ids]
         await asyncio.gather(*tasks, return_exceptions=True)
 
 
 def read_places():
     with open("places.json", "r", encoding="utf-8") as fh:
         return json.loads(fh.read())
+
+
+# ------------------------------------------------------------------------------
 
 
 places = read_places()
@@ -102,5 +112,9 @@ ic(len(in_dir))
 ids = [i for i in ids if i not in in_dir]
 ic(len(ids))
 
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 for b in partition_all(100, ids):
     asyncio.run(batch(b))
+
+# 18.078 places
